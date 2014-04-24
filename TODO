@@ -1,36 +1,5 @@
 
 
-TODO:
-	class
-		aleatorio
-
-		casiordenada
-			Arreglo ordenado
-			% de swap definido.
-
-	Main
-		generacion de estadisticas
-		arrancar los algoritmos.
-
-		Numero de repeticiones (evaluar si repetir el experimento)
-		formato de salida
-			Caso promedio
-			Tiempo 
-
-
-		numero de comparaciones
-		tiempo de ejecucion
-		numero de repeticiones
-		error del experimento
-		tamaño del arreglo (anotarlo para cada experimento)
-		tipo de arreglo 
-
-
-
-TODO informe:
-
-
-
 
 
 
