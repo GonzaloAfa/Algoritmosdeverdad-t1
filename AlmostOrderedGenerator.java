@@ -12,7 +12,7 @@ public class AlmostOrderedGenerator extends Generator {
 
         // Ordered array
         for (int i = 0; i < size; i++)
-            array[i] = i;
+            array[i] = i + 1;
 
         // Select the 5% of the elements to swap
         int changedElements = (int) Math.round(size * 0.05);

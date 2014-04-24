@@ -12,7 +12,7 @@ public class RandomGenerator extends Generator {
 
         // Ordered array
         for (int i = 0; i < size; i++)
-            array[i] = i;
+            array[i] = i + 1;
 
         // Let's randomize the array
         for (int i = 0; i < size; i++)
