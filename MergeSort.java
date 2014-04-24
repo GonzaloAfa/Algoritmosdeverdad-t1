@@ -1,8 +1,6 @@
 
 public class MergeSort extends Algorithms {
 
-    public long comparisons;
-
     private void recursiveMergeSort(int[] sortedData, int low, int high) {
         // Base case: 1 element
         if (high == low + 1)

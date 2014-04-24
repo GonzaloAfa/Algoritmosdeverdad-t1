@@ -1,7 +1,6 @@
 
 public class Insertion extends Algorithms {
-    public long comparisons;
-
+   
     public int[] sort(int[] data) {
         // The output sorted array
         int[] sortedData = data.clone();
