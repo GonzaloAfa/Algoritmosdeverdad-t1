@@ -1,79 +1,47 @@
 
-public class MergenSort{
+public class MergeSort extends Algorithms {
 
-		private int[] data;
-		private int[] b ;
+    public long comparisons;
 
-		private int num;
+    private void recursiveMergeSort(int[] sortedData, int low, int high) {
+        // Base case: 1 element
+        if (high == low + 1)
+            return;
 
-		public MergenSort(int[] values) {
-			
-			this.data = values;
-			num = values.length;
-			b = new int [num];
+        int middle = (int) Math.floor((low + high) / 2);
 
-		}
+        // Divide in the half and sort recursively
+        recursiveMergeSort(sortedData, low, middle);
+        recursiveMergeSort(sortedData, middle + 1, high);
 
-		// tiempo que demora el algoritmo		
-		public long sort(){
-		 
-			long a = System.currentTimeMillis();
-			mergesort(0, num - 1);
-		 	return System.currentTimeMillis() - a;
-		}
+        // Sort in one pass the 2 sorted arrays
+        merge(sortedData, low, middle, high);
+    }
 
+    private void merge(int[] sortedData, int low, int middle, int high) {
 
-		private void mergesort(int min, int max) {
+        int[] original = new int[high - low];
+        for (int i = low; i < high; i++)
+            original[i] = sortedData[i];
 
-			if (min < max) {
-				int medio = (min + max) / 2;
+        int index1 = low;
+        int index2 = middle + 1;
+        int indexOutput = low;
 
-				// El arreglo lo divido en varias partes pequenas
-				mergesort(min, medio);
-				mergesort(medio + 1, max);
+        while (index1 <= middle && index2 < high)
+            if (original[index1] <= original[index2])
+                sortedData[indexOutput++] = original[index1++];
+            else
+                sortedData[indexOutput++] = original[index2++];
 
-				// Con las partes pequenas, voy mezclando y ordenando
-				merge(min, medio, max);
-			
-			}
-		
-		}
+        while (index1 <= middle)
+            sortedData[indexOutput++] = original[index1++];
+    }
 
-
-		void merge(int low, int middle, int high){
-
-		    int i, j, k;
-		    
-		    for (i=low; i<=high; i++)
-				b[i]=this.data[i];
-
-		    i 	= low; 
-		    j 	= middle+1; 
-		    k 	= low;
-		    
-		    while ( i<= middle && j<= high)
-				if (b[i]<=b[j])
-				    this.data[k++]=b[i++];
-				else
-				    this.data[k++]=b[j++];
-
-		    while (i<=middle)
-		    	this.data[k++]=b[i++];
-		}
-
-
-	    public void mostrar(){
-
-	    	if ( num != 0 ){
-	    	
-	    		for(int i = 0; i < num; i++){
-	    			System.out.println(this.data[i]);
-	    		}
-	    	}
-	    }
-
-		
-
-
-	}
+    public int[] sort(int[] data) {
+        int[] sortedData = data.clone();
+        recursiveMergeSort(sortedData, 0, sortedData.length);
+        return sortedData;
+    }
+}
 

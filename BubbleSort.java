@@ -1,19 +1,26 @@
+public class BubbleSort extends Algorithms {
 
-public static void BubbleSort(int[] data){
+    public long comparisons;
 
-    int n = data.length;
+    public int[] sort(int[] data) {
+        // The output sorted array
+        int[] sortedData = data.clone();
+        // Count how many comparisons
+        comparisons = 0;
 
-    for (int pass = 1; pass < n; pass++) { // count how many times
+        for (int pass = 1; pass < sortedData.length; pass++) {
 
-        // This next loop becomes shorter and shorter
-        for (int i=0; i < n-pass; i++) {
-            if (data[i] > data[i+1]) {
-
-                // exchange elements
-                int temp    = data[i];
-                data[i]     = data[i+1];
-                data[i+1]   = temp;
+            // This next loop becomes shorter and shorter
+            for (int i = 0; i < sortedData.length - pass; i++, comparisons++) {
+                // Check if elements are in correct order
+                if (sortedData[i] > sortedData[i + 1]) {
+                    // Swap elements
+                    int temp = sortedData[i];
+                    sortedData[i] = sortedData[i + 1];
+                    sortedData[i + 1] = temp;
+                }
             }
         }
+        return sortedData;
     }
 }
