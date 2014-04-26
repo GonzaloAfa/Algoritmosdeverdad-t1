@@ -9,8 +9,8 @@ import java.io.PrintWriter;
 */
 class DataReport {
 
-    String header = "Numero de comparaciones;Tiempo de ejecución;Numero de repeticiones;" +
-            "Error del experimento;Tamaño del arreglo;Tipo de arreglo";
+    String header = "Numero de comparaciones;Tiempo de ejecucion;Numero de repeticiones;" +
+            "Error del experimento; Tamano del arreglo; Tipo de arreglo";
 
     PrintWriter[] writers = new PrintWriter[4];
 
@@ -40,6 +40,7 @@ class DataReport {
 
     public void makeReport(long comparisons, double executionTime, int repetitions,
                            int error, int arraySize, String arrayType, Algorithm currAlgorithm) {
+    	
         writers[currAlgorithm.i].println(comparisons + ";" + executionTime + ";" + repetitions
                 + ";" + error + ";" + arraySize + ";" + arrayType);
     }

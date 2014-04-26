@@ -1,33 +1,60 @@
 public class QuickSort extends Algorithms {
+	private int[] sortedData;
+	
+	public QuickSort(){
+		this.comparisons = 0;
+	}
+	
+    public int[] sort(int[] data) {
+    	
+    	sortedData = data.clone();
+        quickSort(0, data.length-1);
+        
+        return sortedData;
+    }
+    
+    public void quickSort(int low, int high) {
 
-    public void quickSort(int[] sortedData, int first, int last) {
-        // Select the last one as the pivot
-        int piv = sortedData[last];
+        int pivot = sortedData[(low+high)/2];
 
-        int i = first, j = last - 1;
-        int aux;
-
-        while (i < last && i <= j && j >= 0) {
-            if (sortedData[i] > piv) {
-                swap(sortedData, i, j--);
-            } else
-                i++;
+        int i = low; 
+        int j = high;
+        
+        while (i <= j) {
+        	comparisons++;
+        	
+        	while(sortedData[i] < pivot){
+        		i++;
+        		comparisons++;
+        	}
+        	while(sortedData[j] > pivot){
+        		j--;        	
+        		comparisons++;
+        	}
+        	if(i<=j){
+        		comparisons++;
+        		swap(i++, j--);
+        	}
         }
 
-        if (first < j) quickSort(sortedData, first, j);
-        if (j < last - 1) quickSort(sortedData, j + 1, last);
-    
-	}
+        if (low < j){
+    		comparisons++;
+        	quickSort(low, j);
+        }
+        if (i < high){	
+    		comparisons++;
+        	quickSort(i, high);        
+        }
+    }
 
-    private void swap(int[] sortedData, int index1, int index2) {
+    private void swap(int index1, int index2) {
         int tmp = sortedData[index1];
         sortedData[index1] = sortedData[index2];
         sortedData[index2] = tmp;
     }
-
-    public int[] sort(int[] data) {
-        int[] sortedData = data.clone();
-        quickSort(sortedData, 0, data.length);
-        return sortedData;
+    
+    public long getComparisons(){
+    	return this.comparisons;
     }
+
 }

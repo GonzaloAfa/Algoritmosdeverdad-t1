@@ -5,4 +5,7 @@ public abstract class Algorithms {
 	public long comparisons;
 
     public abstract int[] sort(int[] data);
+   
+    public abstract long getComparisons();
+    
 }
