@@ -5,6 +5,7 @@ public class MergeSort extends Algorithms {
 	private int[] helper;
 	
 	private int length;
+    private String name = "MergeSort";
 	
 	public MergeSort(){
         this.comparisons    = 0;
@@ -83,5 +84,10 @@ public class MergeSort extends Algorithms {
     public long getExecutionTime(){
         return this.executionTime;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
 }
 

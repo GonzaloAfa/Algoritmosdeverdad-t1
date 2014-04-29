@@ -1,5 +1,6 @@
 public class BubbleSort extends Algorithms {
 
+    private String name = "BubbleSort"; 
     
     public BubbleSort(){
     	this.comparisons    = 0;
@@ -47,5 +48,9 @@ public class BubbleSort extends Algorithms {
 
     public long getExecutionTime(){
         return this.executionTime;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

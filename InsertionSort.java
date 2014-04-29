@@ -1,6 +1,7 @@
 
 public class InsertionSort extends Algorithms {
 	
+    private String name = "InsertionSort";
 	
 	public InsertionSort(){
         this.comparisons    = 0;
@@ -49,5 +50,11 @@ public class InsertionSort extends Algorithms {
     public long getExecutionTime(){
         return this.executionTime;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
+
     
 }

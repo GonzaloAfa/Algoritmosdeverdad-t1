@@ -10,7 +10,7 @@ public abstract class Algorithms {
     public abstract int[] sort(int[] data);
    
     public abstract long getComparisons();
-    
     public abstract long getExecutionTime();
+    public abstract String getName();
 
 }

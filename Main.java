@@ -16,38 +16,72 @@ class Main {
 
 		System.out.println("Test");
 
-		RandomGenerator randomArray 				= new RandomGenerator();
-		AlmostOrderedGenerator almostOrderedArray 	= new AlmostOrderedGenerator();
+		int minReplays 	= 3;
 
-		int size[] = new int[10];
-		
-		for (int i = 0 ; i < size.length ; i++)
-			size[i] = (int)Math.pow(2.0 , (double)(20+i));
+		// TODO: replace value 
+		int minSizeArray = 5;
+		int maxSizeArray = 15;
 
-
-//		int sortedData[] 	= randomArray.generateArray(2048);
-		int sortedData[] 	= randomArray.generateArray(2048);
-		
 		BubbleSort bubble 		= new BubbleSort();
 		InsertionSort insertion	= new InsertionSort();
 		MergeSort merge			= new MergeSort();
 		QuickSort quick 		= new QuickSort();
 
+		Algorithms algorithm[] 	= {bubble, insertion, merge, quick};
+
 		Statistics statistics 	= new Statistics();
 
-		bubble.sort(sortedData);
-		System.out.println("Bubble: "	+ bubble.getComparisons());
-		
-		insertion.sort(sortedData);
-		System.out.println("Insertion: "+ insertion.getComparisons());
-		
-		merge.sort(sortedData);
-		System.out.println("Merge: "	+ merge.getComparisons());
-		
-		quick.sort(sortedData);
-		System.out.println("Quick: "	+ quick.getComparisons());
-		
-		 
+
+		// Type Array
+		RandomGenerator randomArray 				= new RandomGenerator();
+		AlmostOrderedGenerator almostOrderedArray 	= new AlmostOrderedGenerator();
+
+		Generator array[] = {randomArray, almostOrderedArray};
+
+
+		// Size Array
+		int size[] = new int[maxSizeArray - minSizeArray + 1];
+
+		// Init Array		
+		for (int i = 0 ; i < size.length ; i++)
+			size[i] = (int)Math.pow(2.0 , (double)(minSizeArray+i));
+
+
+		// start algorithm.
+
+		// Type array
+		for (int type=0; type < array.length ; type++ ) {
+
+			// Size array
+			for (int p = 0; p < size.length; p++ ) {
+
+				// replay
+				for (int replay = 0; replay < minReplays ; replay++ ) {
+
+					// TODO: calculate SD all algorithm and then stop.
+
+					// generate Array
+					int sortedData[] 	= array[type].generateArray(size[p]);
+				
+					// Type algorithm				
+					for (int i = 0 ; i < algorithm.length; i++) {
+
+						// TODO: if !(sd in range) --> replay algorithm
+
+						// sort
+						algorithm[i].sort(sortedData);
+
+						// get information run algorithm
+						System.out.println(algorithm[i].getName() + " \t\t: " + algorithm[i].getComparisons());
+	
+						// Save information
+
+					}
+
+
+				}
+			}
+		}
 	}
 	
 	

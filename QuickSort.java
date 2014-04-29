@@ -1,6 +1,7 @@
 public class QuickSort extends Algorithms {
 	
     private int[] sortedData;
+    private String name = "QuickSort";
 	
 	public QuickSort(){
         this.comparisons    = 0;
@@ -70,6 +71,11 @@ public class QuickSort extends Algorithms {
     public long getExecutionTime(){
         return this.executionTime;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
 
 
 }
