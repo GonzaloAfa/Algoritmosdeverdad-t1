@@ -1,20 +1,29 @@
 public class BubbleSort extends Algorithms {
 
-    private long comparisons;
     
     public BubbleSort(){
-    	this.comparisons = 0;
+    	this.comparisons    = 0;
+        this.executionTime  = 0;
+        this.auxTime        = 0;
     }
 
     public int[] sort(int[] data) {
-        // Count how many comparisons
-        this.comparisons = 0;
     	
         // The output sorted array
         int[] sortedData = data.clone();
         // Count how many comparisons
-        comparisons = 0;
+        this.comparisons = 0;
+        this.auxTime = System.currentTimeMillis();
 
+        sortedData = bubbleSort(sortedData);
+        
+        this.executionTime = System.currentTimeMillis() - this.auxTime;
+
+        return sortedData;
+    }
+
+    private int[] bubbleSort(int[] sortedData){
+        
         for (int pass = 1; pass < sortedData.length; pass++, comparisons++) {
 
             // This next loop becomes shorter and shorter
@@ -25,7 +34,7 @@ public class BubbleSort extends Algorithms {
                     int temp = sortedData[i];
                     sortedData[i] = sortedData[i + 1];
                     sortedData[i + 1] = temp;
-                    comparisons++;
+                    this.comparisons++;
                 }
             }
         }
@@ -34,5 +43,9 @@ public class BubbleSort extends Algorithms {
     
     public long getComparisons(){
     	return this.comparisons;
+    }
+
+    public long getExecutionTime(){
+        return this.executionTime;
     }
 }

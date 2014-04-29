@@ -1,14 +1,24 @@
 public class QuickSort extends Algorithms {
-	private int[] sortedData;
+	
+    private int[] sortedData;
 	
 	public QuickSort(){
-		this.comparisons = 0;
+        this.comparisons    = 0;
+        this.executionTime  = 0;
+        this.auxTime        = 0;
 	}
 	
     public int[] sort(int[] data) {
     	
     	sortedData = data.clone();
+
+        this.comparisons = 0;
+        this.auxTime = System.currentTimeMillis();
+
+
         quickSort(0, data.length-1);
+        
+        this.executionTime = System.currentTimeMillis() - this.auxTime;
         
         return sortedData;
     }
@@ -56,5 +66,10 @@ public class QuickSort extends Algorithms {
     public long getComparisons(){
     	return this.comparisons;
     }
+
+    public long getExecutionTime(){
+        return this.executionTime;
+    }
+
 
 }

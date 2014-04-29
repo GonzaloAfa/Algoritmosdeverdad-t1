@@ -7,7 +7,9 @@ public class MergeSort extends Algorithms {
 	private int length;
 	
 	public MergeSort(){
-		this.comparisons = 0;
+        this.comparisons    = 0;
+        this.executionTime  = 0;
+        this.auxTime        = 0;
 	}
 
 	
@@ -17,12 +19,17 @@ public class MergeSort extends Algorithms {
         length				= this.sortedData.length;
 		helper				= new int [length];
 	
-        recursiveMergeSort(0, length-1);
+        this.comparisons = 0;
+        this.auxTime = System.currentTimeMillis();
+    
+        mergeSort(0, length-1);
+
+        this.executionTime = System.currentTimeMillis() - this.auxTime;
         
         return this.sortedData;
     }
 	
-	private void recursiveMergeSort(int low, int high) {
+	private void mergeSort(int low, int high) {
         // Base case: 1 element
 		if ( low < high ){
     		comparisons++;
@@ -30,8 +37,8 @@ public class MergeSort extends Algorithms {
 	        int middle = low + (high - low) / 2;
 	
 	        // Divide in the half and sort recursively
-	        recursiveMergeSort(low, middle);
-	        recursiveMergeSort(middle + 1, high);
+	        mergeSort(low, middle);
+	        mergeSort(middle + 1, high);
 	
 	        // Sort in one pass the 2 sorted arrays
 	        merge(low, middle, high);
@@ -73,5 +80,8 @@ public class MergeSort extends Algorithms {
     	return this.comparisons;
     }
     
+    public long getExecutionTime(){
+        return this.executionTime;
+    }
 }
 
