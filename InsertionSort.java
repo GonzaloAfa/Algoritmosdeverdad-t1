@@ -18,7 +18,7 @@ public class InsertionSort extends Algorithms {
 
     private int[] insertionSort(int[] sortedData) {
 
-        for (int i = 1; i < sortedData.length; i++, comparisons++) {
+        for (int i = 1; i < sortedData.length; i++) {
 
             int aux = sortedData[i];
             int j;

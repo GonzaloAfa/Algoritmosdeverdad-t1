@@ -7,9 +7,10 @@ import java.io.*;
 */
 class DataReport {
 
-    String header = "N° repeticiones;Error;Tamano del arreglo;N° comparaciones;Tiempo de ejecucion;";
+    String header = "N° repeticiones;Error;Tamano del arreglo;N° comparaciones;Tiempo de ejecucion;"
+            + "Comparaciones promedio;Tiempo promedio";
 
-    private PrintWriter writer;
+    private PrintWriter writer, summary;
     public boolean console;
 
 
@@ -19,11 +20,13 @@ class DataReport {
         if (!theDir.exists())
             theDir.mkdir();
 
-        String filename = "results/" + algorithm.getName() + "-" + arrayType.type + ".txt";
+        String filename = "results/" + algorithm.getName() + "-" + arrayType.type;
         this.console = console;
         try {
-            writer = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
+            writer = new PrintWriter(new BufferedWriter(new FileWriter(filename + ".txt", true)));
+            summary = new PrintWriter(new BufferedWriter(new FileWriter(filename + "_summary.txt", true)));
 
+            summary.println(header);
             writer.println(header);
             if (console)
                 System.out.println("" + header);
@@ -38,7 +41,19 @@ class DataReport {
             System.out.println("" + statistic);
     }
 
-    public void close() {
-        writer.close();
+    public void makeSummary(Statistics statistic) {
+        summary.println("" + statistic);
     }
+
+    public void close() {
+
+        writer.close();
+        summary.close();
+    }
+
+    public void flush() {
+        summary.flush();
+        writer.flush();
+    }
+
 }

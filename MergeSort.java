@@ -52,10 +52,8 @@ public class MergeSort extends Algorithms {
             comparisons++;
 
             if (helper[index1] <= helper[index2]) {
-                comparisons++;
                 sortedData[indexOutput++] = helper[index1++];
             } else {
-                comparisons++;
                 sortedData[indexOutput++] = helper[index2++];
             }
 

@@ -24,8 +24,6 @@ public class QuickSort extends Algorithms {
         int j = high;
 
         while (i <= j) {
-            comparisons++;
-
             while (sortedData[i] < pivot) {
                 i++;
                 comparisons++;
@@ -34,20 +32,20 @@ public class QuickSort extends Algorithms {
                 j--;
                 comparisons++;
             }
+
+            comparisons++;
             if (i <= j) {
-                comparisons++;
                 swap(i++, j--);
             }
         }
 
         if (low < j) {
-            comparisons++;
             quickSort(low, j);
         }
         if (i < high) {
-            comparisons++;
             quickSort(i, high);
         }
+        comparisons += 2;
     }
 
     private void swap(int index1, int index2) {

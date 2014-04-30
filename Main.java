@@ -14,11 +14,8 @@ class Main {
 
     static public void main(String[] args) throws IOException {
 
-        System.out.println("Test");
+        int maxReplays = 5000;
 
-        int maxReplays = 10000;
-
-        // TODO: replace value
         int minSizeArray = 10;
         int maxSizeArray = 20;
 
@@ -83,7 +80,10 @@ class Main {
                             break;
 
                     }
+                    dataReporter.makeSummary(statistics);
+                    dataReporter.flush();
                 }
+                dataReporter.close();
             }
         }
     }

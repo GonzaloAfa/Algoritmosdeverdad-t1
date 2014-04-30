@@ -1,34 +1,16 @@
 import java.util.ArrayList;
 
-/*
- * 
- * Objeto Statistics
- *
- * Crear estadistica
- * Cargar datos
- * porcentaje de error
- * Generar estadistica
- * 
- * 
- * 		numero de comparaciones
-		tiempo de ejecucion
-		numero de repeticiones
-		error del experimento
-		tamaño del arreglo (anotarlo para cada experimento)
-		tipo de arreglo 
-
- */
 class Statistics {
 
     private int arraySize;
 
     ArrayList<AlgorithmStatistic> evaluations;
-    public double error, mean, devStd;
+    public double error, meanTime, devStd, meanComparisons;
     public int repetitions;
     private AlgorithmStatistic currentEvaluation;
 
     public Statistics(int arraySize) {
-        evaluations = new ArrayList<AlgorithmStatistic>(100);
+        evaluations = new ArrayList<AlgorithmStatistic>(1000);
         this.arraySize = arraySize;
     }
 
@@ -41,22 +23,33 @@ class Statistics {
 
         evaluations.add(currentEvaluation);
 
+        meanTime = computeMeanTime();
+        meanComparisons = computeMeanComparisons();
+
         if (replay > 1) {
-            mean = computeMean();
             devStd = standardDeviation();
-            error = devStd * 100 / mean;
+            error = devStd * 100 / meanTime;
         }
     }
 
     public boolean doContinue() {
-        return error < (5 * mean);
+        return error < (5 * meanTime);
     }
 
-    public double computeMean() {
+    public double computeMeanTime() {
         double sum = 0;
 
         for (AlgorithmStatistic measurement : evaluations)
             sum += measurement.executionTime;
+
+        return sum / evaluations.size();
+    }
+
+    public double computeMeanComparisons() {
+        long sum = 0;
+
+        for (AlgorithmStatistic measurement : evaluations)
+            sum += measurement.comparisons;
 
         return sum / evaluations.size();
     }
@@ -66,14 +59,15 @@ class Statistics {
         double sum = 0;
 
         for (AlgorithmStatistic measurement : evaluations)
-            sum += Math.pow(measurement.executionTime - mean, 2);
+            sum += Math.pow(measurement.executionTime - meanTime, 2);
 
         return Math.sqrt(sum / (evaluations.size() - 1));
     }
 
     @Override
     public String toString() {
-        return repetitions + ";" + error + ";" + arraySize + ";" + currentEvaluation;
+        return repetitions + ";" + error + ";" + arraySize + ";" + currentEvaluation
+                + ";" + meanComparisons + ";" + meanTime;
     }
 
 }

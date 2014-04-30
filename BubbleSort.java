@@ -1,6 +1,6 @@
 public class BubbleSort extends Algorithms {
 
-    public BubbleSort(){
+    public BubbleSort() {
         super("BubbleSort");
         this.type = AlgorithmType.BUBBLESORT;
     }
@@ -14,9 +14,9 @@ public class BubbleSort extends Algorithms {
         return sortedData;
     }
 
-    private int[] bubbleSort(int[] sortedData){
-        
-        for (int pass = 1; pass < sortedData.length; pass++, comparisons++) {
+    private int[] bubbleSort(int[] sortedData) {
+
+        for (int pass = 1; pass < sortedData.length; pass++) {
 
             // This next loop becomes shorter and shorter
             for (int i = 0; i < sortedData.length - pass; i++, comparisons++) {
@@ -26,7 +26,6 @@ public class BubbleSort extends Algorithms {
                     int temp = sortedData[i];
                     sortedData[i] = sortedData[i + 1];
                     sortedData[i + 1] = temp;
-                    this.comparisons++;
                 }
             }
         }
