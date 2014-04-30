@@ -3,7 +3,8 @@ public class BubbleSort extends Algorithms {
     private String name = "BubbleSort"; 
     
     public BubbleSort(){
-    	this.comparisons    = 0;
+        this.type = AlgorithmType.BUBBLESORT;
+        this.comparisons    = 0;
         this.executionTime  = 0;
         this.auxTime        = 0;
     }

@@ -3,6 +3,16 @@ import java.util.Random;
 abstract class Generator {
     Random r;
 
+    public enum ArrayType {
+        Random("Random"), CuasiRandom("CuasiRandom");
+
+        public String type;
+
+        ArrayType(String s) {
+            this.type = s;
+        }
+    }
+
     public Generator() {
         r = new Random();
     }

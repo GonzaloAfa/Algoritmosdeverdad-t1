@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * 
  * Objeto Statistics
@@ -18,18 +20,51 @@
  */
 class Statistics {
 
-    AlgorithmStatistic[] algorithms = new AlgorithmStatistic[4];
+    private int arraySize;
 
-    public Statistics() {
-        for (int i = 0; i < 4; i++) {
-            algorithms[i] = new AlgorithmStatistic();
-        }
+    ArrayList<AlgorithmStatistic> evaluations;
+    public double error;
+    public int repetitions;
+    private AlgorithmStatistic currentEvaluation;
+
+    public Statistics(int arraySize) {
+        evaluations = new ArrayList<AlgorithmStatistic>(100);
+        this.arraySize = arraySize;
     }
 
-    public void updateMeasurement(long comparisons, double executionTime, int repetitions,
-                                  int error, int arraySize, String arrayType, DataReport.Algorithm currAlgorithm) {
-        algorithms[currAlgorithm.i].appendMeasurement(comparisons, executionTime, repetitions,
-                error, arraySize, arrayType);
+    public void updateMeasurement(Algorithms algorithm, int replay) {
+        long comparisons = algorithm.getComparisons();
+        double executionTime = algorithm.getExecutionTime();
 
+        currentEvaluation = new AlgorithmStatistic(comparisons, executionTime);
+        repetitions = replay;
+
+        evaluations.add(currentEvaluation);
+
+        if (replay > 1)
+            error = standardDeviation();
     }
+
+    public double standardDeviation() {
+
+        double sum = 0;
+        double mean;
+
+        for (AlgorithmStatistic measurement : evaluations)
+            sum += measurement.comparisons;
+        mean = sum / evaluations.size();
+
+        sum = 0;
+
+        for (AlgorithmStatistic measurement : evaluations)
+            sum += Math.pow(measurement.comparisons - mean, 2);
+
+        return Math.sqrt(sum / (evaluations.size() - 1));
+    }
+
+    @Override
+    public String toString() {
+        return repetitions + ";" + error + ";" + arraySize + ";" + currentEvaluation;
+    }
+
 }

@@ -1,3 +1,4 @@
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,44 +10,33 @@ import java.io.PrintWriter;
 */
 class DataReport {
 
-    String header = "Numero de comparaciones;Tiempo de ejecucion;Numero de repeticiones;" +
-            "Error del experimento; Tamano del arreglo; Tipo de arreglo";
+    String header = "N° repeticiones;Error;Tamano del arreglo;N° comparaciones;Tiempo de ejecucion;";
 
-    PrintWriter[] writers = new PrintWriter[4];
+    private PrintWriter writer;
+    public boolean console;
 
-    public enum Algorithm {
-        BUBBLESORT(0), INSERTIONSORT(1), MERGESORT(2), QUICKSORT(3);
 
-        public int i;
-
-        Algorithm(int i) {
-            this.i = i;
-        }
-    }
-
-    public DataReport() {
+    public DataReport(Generator.ArrayType arrayType, Algorithms algorithm, boolean console) {
+        String filename = "results/" + algorithm.getName() + "-" + arrayType.type + ".txt";
+        this.console = console;
         try {
-            writers[0] = new PrintWriter(new BufferedWriter(new FileWriter("results/bubblesort.txt", true)));
-            writers[1] = new PrintWriter(new BufferedWriter(new FileWriter("results/insertionsort.txt", true)));
-            writers[2] = new PrintWriter(new BufferedWriter(new FileWriter("results/mergesort.txt", true)));
-            writers[3] = new PrintWriter(new BufferedWriter(new FileWriter("results/quicksort.txt", true)));
+            writer = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
 
-            for (int i = 0; i < 4; i++)
-                writers[i].println(header);
+            writer.println(header);
+            if (console)
+                System.out.println("" + header);
         } catch (IOException e) {
-            System.out.println("ERROR ABRIENDO ARCHIVOS!!!");
+            System.out.println("ERROR ABRIENDO ARCHIVO!!!");
         }
     }
 
-    public void makeReport(long comparisons, double executionTime, int repetitions,
-                           int error, int arraySize, String arrayType, Algorithm currAlgorithm) {
-    	
-        writers[currAlgorithm.i].println(comparisons + ";" + executionTime + ";" + repetitions
-                + ";" + error + ";" + arraySize + ";" + arrayType);
+    public void makeReport(Statistics statistic) {
+        writer.println("" + statistic);
+        if (console)
+            System.out.println("" + statistic);
     }
 
-    public void closeAll() {
-        for (int i = 0; i < 4; i++)
-            writers[i].close();
+    public void close() {
+        writer.close();
     }
 }
