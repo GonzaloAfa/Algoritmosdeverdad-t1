@@ -16,11 +16,11 @@ class Main {
 
         System.out.println("Test");
 
-        int maxReplays = 100000;
+        int maxReplays = 10000;
 
         // TODO: replace value
-        int minSizeArray = 5;
-        int maxSizeArray = 15;
+        int minSizeArray = 10;
+        int maxSizeArray = 20;
 
         BubbleSort bubble = new BubbleSort();
         InsertionSort insertion = new InsertionSort();

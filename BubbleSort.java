@@ -18,7 +18,7 @@ public class BubbleSort extends Algorithms {
         this.auxTime = System.currentTimeMillis();
 
         sortedData = bubbleSort(sortedData);
-        
+
         this.executionTime = System.currentTimeMillis() - this.auxTime;
 
         return sortedData;

@@ -51,13 +51,13 @@ class Statistics {
         double mean;
 
         for (AlgorithmStatistic measurement : evaluations)
-            sum += measurement.comparisons;
+            sum += measurement.executionTime;
         mean = sum / evaluations.size();
 
         sum = 0;
 
         for (AlgorithmStatistic measurement : evaluations)
-            sum += Math.pow(measurement.comparisons - mean, 2);
+            sum += Math.pow(measurement.executionTime - mean, 2);
 
         return Math.sqrt(sum / (evaluations.size() - 1));
     }
