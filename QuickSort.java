@@ -1,26 +1,17 @@
 public class QuickSort extends Algorithms {
 
     private int[] sortedData;
-    private String name = "QuickSort";
 
     public QuickSort() {
+        super("QuickSort");
         this.type = AlgorithmType.QUICKSORT;
-        this.comparisons = 0;
-        this.executionTime = 0;
-        this.auxTime = 0;
     }
 
-    public int[] sort(int[] data) {
+    public int[] mSort(int[] data) {
 
         sortedData = data.clone();
 
-        this.comparisons = 0;
-        this.auxTime = System.currentTimeMillis();
-
-
         quickSort(0, data.length - 1);
-
-        this.executionTime = System.currentTimeMillis() - this.auxTime;
 
         return sortedData;
     }
@@ -64,18 +55,4 @@ public class QuickSort extends Algorithms {
         sortedData[index1] = sortedData[index2];
         sortedData[index2] = tmp;
     }
-
-    public long getComparisons() {
-        return this.comparisons;
-    }
-
-    public long getExecutionTime() {
-        return this.executionTime;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-
 }

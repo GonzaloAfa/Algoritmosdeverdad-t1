@@ -5,28 +5,20 @@ public class MergeSort extends Algorithms {
     private int[] helper;
 
     private int length;
-    private String name = "MergeSort";
 
     public MergeSort() {
+        super("MergeSort");
         this.type = AlgorithmType.MERGESORT;
-        this.comparisons = 0;
-        this.executionTime = 0;
-        this.auxTime = 0;
     }
 
 
-    public int[] sort(int[] data) {
+    public int[] mSort(int[] data) {
 
         this.sortedData = data.clone();
         length = this.sortedData.length;
         helper = new int[length];
 
-        this.comparisons = 0;
-        this.auxTime = System.currentTimeMillis();
-
         mergeSort(0, length - 1);
-
-        this.executionTime = System.currentTimeMillis() - this.auxTime;
 
         return this.sortedData;
     }
@@ -38,7 +30,7 @@ public class MergeSort extends Algorithms {
 
             int middle = low + (high - low) / 2;
 
-            // Divide in the half and sort recursively
+            // Divide in the half and mSort recursively
             mergeSort(low, middle);
             mergeSort(middle + 1, high);
 
@@ -74,19 +66,5 @@ public class MergeSort extends Algorithms {
         }
 
     }
-
-
-    public long getComparisons() {
-        return this.comparisons;
-    }
-
-    public long getExecutionTime() {
-        return this.executionTime;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
 }
 

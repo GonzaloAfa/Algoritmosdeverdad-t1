@@ -4,17 +4,40 @@
 public abstract class Algorithms {
 
     public long comparisons;
-    public long executionTime;
-    public long auxTime;
+    public double executionTime;
+    public final String name;
     public AlgorithmType type;
 
-    public abstract int[] sort(int[] data);
+    public Algorithms(String name) {
+        this.name = name;
+    }
 
-    public abstract long getComparisons();
+    public int[] sort(int[] data) {
+        this.comparisons = 0;
+        this.executionTime = 0;
 
-    public abstract long getExecutionTime();
+        long time = System.nanoTime();
 
-    public abstract String getName();
+        int[] sortedData = mSort(data);
+
+        this.executionTime = (System.nanoTime() - time) / 1000000.0;
+
+        return sortedData;
+    }
+
+    public abstract int[] mSort(int[] data);
+
+    public long getComparisons() {
+        return this.comparisons;
+    }
+
+    public double getExecutionTime() {
+        return this.executionTime;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
     public enum AlgorithmType {
         BUBBLESORT(0), INSERTIONSORT(1), MERGESORT(2), QUICKSORT(3);

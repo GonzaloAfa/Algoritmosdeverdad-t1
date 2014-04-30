@@ -1,8 +1,5 @@
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 /*
     Obtener los datos
@@ -17,6 +14,11 @@ class DataReport {
 
 
     public DataReport(Generator.ArrayType arrayType, Algorithms algorithm, boolean console) {
+        // First create the folder
+        File theDir = new File("results");
+        if (!theDir.exists())
+            theDir.mkdir();
+
         String filename = "results/" + algorithm.getName() + "-" + arrayType.type + ".txt";
         this.console = console;
         try {

@@ -8,9 +8,9 @@ public class TestSuite {
     public static void main(String[] args) {
         Generator gen = new RandomGenerator();
         Generator aGen = new AlmostOrderedGenerator();
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Random array: " + Arrays.toString(gen.generateArray(30)));
-            System.out.println("Almost random array: " + Arrays.toString(aGen.generateArray(30)));
-        }
+        //for (int i = 0; i < 5; i++) {
+        System.out.println("Random array: " + Arrays.toString(gen.generateArray((int) Math.pow(2, 20))));
+        //System.out.println("Almost random array: " + Arrays.toString(aGen.generateArray(30)));
+        //}
     }
 }

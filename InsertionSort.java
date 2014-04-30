@@ -1,27 +1,17 @@
 
 public class InsertionSort extends Algorithms {
 
-    private String name = "InsertionSort";
-
     public InsertionSort() {
+        super("InsertionSort");
         this.type = AlgorithmType.INSERTIONSORT;
-        this.comparisons = 0;
-        this.executionTime = 0;
-        this.auxTime = 0;
-
     }
 
-    public int[] sort(int[] data) {
-
+    public int[] mSort(int[] data) {
         // The output sorted array
         int[] sortedData = data.clone();
 
-        this.comparisons = 0;
-        this.auxTime = System.currentTimeMillis();
-
         sortedData = insertionSort(sortedData);
 
-        this.executionTime = System.currentTimeMillis() - this.auxTime;
         return sortedData;
     }
 
@@ -41,19 +31,4 @@ public class InsertionSort extends Algorithms {
 
         return sortedData;
     }
-
-
-    public long getComparisons() {
-        return this.comparisons;
-    }
-
-    public long getExecutionTime() {
-        return this.executionTime;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-
 }

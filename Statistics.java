@@ -23,7 +23,7 @@ class Statistics {
     private int arraySize;
 
     ArrayList<AlgorithmStatistic> evaluations;
-    public double error;
+    public double error, mean, devStd;
     public int repetitions;
     private AlgorithmStatistic currentEvaluation;
 
@@ -41,20 +41,29 @@ class Statistics {
 
         evaluations.add(currentEvaluation);
 
-        if (replay > 1)
-            error = standardDeviation();
+        if (replay > 1) {
+            mean = computeMean();
+            devStd = standardDeviation();
+            error = devStd * 100 / mean;
+        }
+    }
+
+    public boolean doContinue() {
+        return error < (5 * mean);
+    }
+
+    public double computeMean() {
+        double sum = 0;
+
+        for (AlgorithmStatistic measurement : evaluations)
+            sum += measurement.executionTime;
+
+        return sum / evaluations.size();
     }
 
     public double standardDeviation() {
 
         double sum = 0;
-        double mean;
-
-        for (AlgorithmStatistic measurement : evaluations)
-            sum += measurement.executionTime;
-        mean = sum / evaluations.size();
-
-        sum = 0;
 
         for (AlgorithmStatistic measurement : evaluations)
             sum += Math.pow(measurement.executionTime - mean, 2);

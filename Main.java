@@ -70,7 +70,7 @@ class Main {
                         // generate Array
                         int unsortedData[] = array[type].generateArray(size[p]);
 
-                        // sort
+                        // mSort
                         int sortedData[] = algorithm[i].sort(unsortedData);
 
                         statistics.updateMeasurement(algorithm[i], replay);
@@ -79,7 +79,7 @@ class Main {
                         dataReporter.makeReport(statistics);
 
                         // Check if error is lower than 5%
-                        if (statistics.error < 0.05 && replay > 1)
+                        if (statistics.doContinue() && replay > 1)
                             break;
 
                     }
